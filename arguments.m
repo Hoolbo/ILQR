@@ -20,8 +20,8 @@ arg.lamb_factor = 1.5;
 arg.lamb_init = 5;
 arg.lamb_max = 2000;
 arg.totalBarrierCost = 0;
-arg.startSpeed = 1;
-arg.desireSpeed = 10;
+arg.startSpeed = 0;
+arg.desireSpeed = 15;
 arg.preX = zeros(arg.N+1,arg.num_states) * nan;
 arg.preU = zeros(arg.N,arg.num_ctrl) * nan;
 %% 障碍函数约束参数
@@ -34,10 +34,10 @@ arg.obs_q2 = 1;
 %% Q状态代价矩阵 | R控制代价矩阵
 arg.Q = [2, 0, 0, 0;
          0, 2, 0, 0;
-         0, 0, 1, 0;
-         0, 0, 0, 1 ];
+         0, 0, 0, 0;
+         0, 0, 0, 0.5 ];
 arg.R = [2, 0;
-         0, 4 ];
+         0, 6 ];
      
 %%障碍物参数
 % arg.obs_x = [300,340,380,420,460];   % 障碍物 x 坐标

@@ -70,7 +70,7 @@
 % end
 
 
-function [] = Ploting(Xlog, Xnew, i)
+function [] = Ploting(Xlog, Xnew, Unew,i)
     global arg
     persistent fig_handle car_handle traj_handle pred_handle;
 
@@ -133,7 +133,7 @@ function [] = Ploting(Xlog, Xnew, i)
     else
         set(car_handle, 'XData', corners(:,1), 'YData', corners(:,2));
     end
-
-    title(['Iteration: ', num2str(i)]);
+    
+    title(sprintf('Iteration: %d\n   Speed: %.2f m/s           Accel: %.2f m/s^2           Steer %.1f °', i,Xnew(1,4),Unew(1,1),rad2deg(Unew(1,2))));
     drawnow;
 end

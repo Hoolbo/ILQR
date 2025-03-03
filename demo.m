@@ -20,7 +20,7 @@ function demo
         Xlog(1:2,i) = X(1:2);
         fprintf('速度V=%f\n前轮转角=%f\n',X(4),rad2deg(Unew(1,2)));
         %画图
-        Ploting(Xlog,Xnew,i);
+        Ploting(Xlog,Xnew,Unew,i);
     end
 end
 
