@@ -4,24 +4,14 @@ function demo
     global arg
     %载入参数
     arguments();
-    %%截取地图
-    map_start_index = 500;
-    mat_end_index = 800;
-    arg.xcoord = arg.xcoord(map_start_index:mat_end_index);
-    arg.ycoord = arg.ycoord(map_start_index:mat_end_index);
-    arg.slength = arg.slength(map_start_index:mat_end_index);
-    arg.Curv    = arg.Curv(map_start_index:mat_end_index) ;
-    arg.theta   = arg.theta(map_start_index:mat_end_index) ;
-    %状态变量 x y phi v
-    X = [270; 10 ; 0 ; arg.startSpeed;];
-
+    %状态变量 x X坐标 y Y坐标 phi 航向角 v 速度
+    X = [ 270 ; 10 ; 0 ; arg.startSpeed;];
+    %控制变量 a 加速度 delta 前轮转角（弧度）
+    % U = [ a ; delta ];
+    %% 记录行驶过的轨迹
     Xlog = zeros(arg.num_states,arg.tf/arg.dt);
 
-    %控制变量 a 加速度 delta 前轮转角
-    U = zeros(arg.num_ctrl);
-
     for i=1:arg.tf/arg.dt
-
         fprintf('===================== 仿真第%d步 ==================\n ',i);
         tic
         [Xnew,Unew] = ilqr(X);
@@ -29,14 +19,8 @@ function demo
         X = updateState(Xnew(1,:),Unew(1,:));
         Xlog(1:2,i) = X(1:2);
         fprintf('速度V=%f\n前轮转角=%f\n',X(4),rad2deg(Unew(1,2)));
-
-%         if (mod(i,2) == 0)
-
+        %画图
         Ploting(Xlog,Xnew,i);
-%         end
-%         fprintf('---------- 画图花费时间 ------------\n ',i);
-
-
     end
 end
 
