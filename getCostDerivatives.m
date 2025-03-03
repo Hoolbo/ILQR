@@ -41,15 +41,16 @@ function [lx, lu, lxx, luu, lux] = getCostDerivatives(Xin, U)
     P1 = [1; 0];
     P2 = [0; 1];
     arg.totalBarrierCost = 0;
-
+    obs_x = arg.obs_x;
+    obs_y = arg.obs_y;
     for i = 1:arg.N
         %%%%%%%%%%% 计算状态代价导数
         [x_r, y_r, theta_r] = findClosestPoint(Xin(i,:));
         lx(i,:) = 2 * arg.Q * [Xin(i, 1) - x_r; Xin(i, 2) - y_r; Xin(i, 3) - theta_r; Xin(i, 4) - arg.desireSpeed];
         lxx(i,:,:) = 2 * arg.Q;
         % ---- 障碍物代价计算 ----
-        [b_obs,b_dot_obs, b_ddot_obs] = obstacleCostDerivatives(Xin(i, 1), Xin(i, 2));
-        
+        [b_obs,b_dot_obs, b_ddot_obs] = obstacleCostDerivatives(Xin(i, 1), Xin(i, 2),obs_x,obs_y);
+        obs_x(1) = obs_x(1) + arg.obs_dx;
         lx(i,:) = lx(i,:) + b_dot_obs;
         lxx(i,:,:) = lxx(i,:,:) + b_ddot_obs;
         

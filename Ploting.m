@@ -81,7 +81,7 @@ function [] = Ploting(Xlog, Xnew, Unew,i)
         % 绘制静态元素（仅一次）
         color_lane = [0.678, 0.847, 0.902];
         plot(arg.xcoord, arg.ycoord, '--', 'Color', [0.5,0.8,1], 'LineWidth', 1.2);
-        track_width = 4;
+        track_width = arg.trace_width;
         theta_rad = arg.theta;
         left_lane_x = arg.xcoord + track_width/2 * cos(theta_rad + pi/2);
         left_lane_y = arg.ycoord + track_width/2 * sin(theta_rad + pi/2);

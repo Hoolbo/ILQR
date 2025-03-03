@@ -13,7 +13,7 @@ function demo
 
     for i=1:arg.tf/arg.dt
         fprintf('===================== 仿真第%d步 ==================\n ',i);
-        arg.obs_x(1) = arg.obs_x(1) + 0.1;
+        arg.obs_x(1) = arg.obs_x(1) + arg.obs_dx;
         tic
         [Xnew,Unew] = ilqr(X);
         toc

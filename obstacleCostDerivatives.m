@@ -1,12 +1,13 @@
-function [b,b_dot, b_ddot] = obstacleCostDerivatives(x, y)
+function [b,b_dot, b_ddot] = obstacleCostDerivatives(x, y,obs_x,obs_y)
     global arg
+    
     b = 0;
     b_dot = 0;
     b_ddot = 0;
-    for i = 1:length(arg.obs_x)
+    for i = 1:length(obs_x)
         % 计算与障碍物的距离
-        dx = x - arg.obs_x(i);  % Ego车与障碍物的x坐标差
-        dy = y - arg.obs_y(i);  % Ego车与障碍物的y坐标差
+        dx = x - obs_x(i);  % Ego车与障碍物的x坐标差
+        dy = y - obs_y(i);  % Ego车与障碍物的y坐标差
         dist = sqrt(dx^2 + dy^2);       % 计算距离
 
         % 障碍物代价计算：若距离小于安全阈值，产生代价
