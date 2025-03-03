@@ -28,12 +28,11 @@ arg.num_states = 4;
 arg.num_ctrl = 2;
 
 %地图参数
-load('VIbest0915.mat');
+load('map_info');
 arg.xcoord  = xcoord;
 arg.ycoord  = ycoord;
-load('NurburgringLengthVsCur3.mat');
-arg.slength = slength';
-arg.Curv    = Curv';
+arg.slength = slength;
+arg.Curv    = Curv;
 arg.theta   = theta;
 
 %纯跟踪参数
