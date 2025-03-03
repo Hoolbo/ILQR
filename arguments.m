@@ -7,9 +7,9 @@ arg.num_states = 4;
 arg.num_ctrl = 2;
 %% 地图参数
 load('map_info');
-map_start_index = 1;
-% map_end_index = 800;
-map_end_index = length(xcoord);
+map_start_index = 500;
+map_end_index = 1500;
+% map_end_index = length(xcoord);
 arg.xcoord  = xcoord(map_start_index:map_end_index);
 arg.ycoord  = ycoord(map_start_index:map_end_index);
 arg.slength = slength(map_start_index:map_end_index);
@@ -26,7 +26,7 @@ arg.lamb_init = 5;
 arg.lamb_max = 2000;
 arg.totalBarrierCost = 0;
 arg.startSpeed = 0;
-arg.desireSpeed = 15;
+arg.desireSpeed = 5;
 arg.preX = zeros(arg.N+1,arg.num_states) * nan;
 arg.preU = zeros(arg.N,arg.num_ctrl) * nan;
 %% 障碍函数约束参数
@@ -48,9 +48,9 @@ arg.R = [2, 0;
 % arg.obs_x = [300,340,380,420,460];   % 障碍物 x 坐标
 % arg.obs_y = [2,0.5,1,1.2,1.6];   % 障碍物 y 坐标
 % arg.obs_radius = [1,1,1,1,1]; % 障碍物半径
-arg.obs_x = [300,350];   % 障碍物 x 坐标
-arg.obs_y = [1,2];   % 障碍物 y 坐标
-arg.obs_radius = [1,2]; % 障碍物半径
+arg.obs_x = [300];   % 障碍物 x 坐标
+arg.obs_y = [1];   % 障碍物 y 坐标
+arg.obs_radius = [1.5]; % 障碍物半径
 
 
 %%车辆几何参数
