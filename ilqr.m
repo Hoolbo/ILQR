@@ -19,15 +19,15 @@ for i=1:arg.max_iter
     [Xnew,Unew] = forward(X,U,k,K);
     
     Jnew = getTotalCost(Xnew,Unew);
-    fprintf('Iter %d | λ=%.2f | Jold-Jnew=%.6f | Jold=%.2f\n',i,lamb,Jold-Jnew,Jold);
+%     fprintf('Iter %d | λ=%.2f | Jold-Jnew=%.6f | Jold=%.2f\n',i,lamb,Jold-Jnew,Jold);
     if Jnew <Jold 
         X = Xnew;
         U = Unew;
         lamb = lamb / arg.lamb_factor;
+        arg.preX = X;
+        arg.preU = U;
         if (Jold - Jnew)/Jold < arg.rel_tol
             fprintf('迭代第%d次，求解成功\n',i);
-            arg.preX = X;
-            arg.preU = U;
             break;
         end
         Jold = Jnew;

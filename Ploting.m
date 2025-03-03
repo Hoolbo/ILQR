@@ -94,7 +94,11 @@ function [] = Ploting(Xlog, Xnew, i)
         right_lane_y = arg.ycoord - track_width/2 * sin(theta_rad + pi/2);
         plot(left_lane_x, left_lane_y, '-', 'Color', color_lane, 'LineWidth', 1.5);
         plot(right_lane_x, right_lane_y, '-', 'Color', color_lane, 'LineWidth', 1.5);
-        rectangle('Position', [300, 0, 2, 1], 'FaceColor', 'k');
+        %绘制障碍物
+        for i=1:length(arg.obs_x)
+            rectangle('Position', [arg.obs_x(i) - arg.obs_radius(i), arg.obs_y(i) - arg.obs_radius(i), arg.obs_radius(i) * 2, arg.obs_radius(i)*2], 'FaceColor', 'k');
+        end
+
     else
         figure(fig_handle);
     end
