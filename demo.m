@@ -5,8 +5,8 @@ function demo
     %载入参数
     arguments();
     %%截取地图
-    map_start_index = 1;
-    mat_end_index = length(arg.xcoord);
+    map_start_index = 500;
+    mat_end_index = 800;
     arg.xcoord = arg.xcoord(map_start_index:mat_end_index);
     arg.ycoord = arg.ycoord(map_start_index:mat_end_index);
     arg.slength = arg.slength(map_start_index:mat_end_index);

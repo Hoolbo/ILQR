@@ -58,7 +58,7 @@ arg.lamb_max = 2000;
 arg.totalBarrierCost = 0;
 
 arg.startSpeed = 0;
-arg.desireSpeed = 20;
+arg.desireSpeed = 10;
 arg.steer_max_q1 = 20;
 arg.steer_max_q2 = 5;
 arg.steer_min_q1 = 20;
