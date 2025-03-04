@@ -23,6 +23,7 @@
 % end
 function [Xnew, Unew] = forward(X, U, k, K)
     global arg
+    
     persistent last_alpha  % 持久变量保存上一次成功的alpha
     if isempty(last_alpha)
         last_alpha = 1;  % 初始化为1
@@ -63,4 +64,6 @@ function [Xnew, Unew] = forward(X, U, k, K)
         last_alpha = 1;  % 重置alpha为1，避免后续迭代受影响
 %         error('Line search failed: No suitable alpha found after %d iterations.', max_iterations);
     end
+    
+
 end

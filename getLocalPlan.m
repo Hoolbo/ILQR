@@ -4,7 +4,7 @@ global arg
     mintemp = min(temp);
     index = find(mintemp == temp);
     arg.localPlan = zeros(arg.N,3);
-    arg.localPlanIndex = index + 2;
+    arg.localPlanIndex = index;
     for i=1:100
     arg.localPlan(i,1) = arg.xcoord(index+i);
     arg.localPlan(i,2) = arg.ycoord(index+i);

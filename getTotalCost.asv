@@ -39,10 +39,10 @@ global arg
             end
 
             if arg.is_cal_steer_cost
-                c = U(i,:) * P2 - arg.steer_angle_max;
+                c = U(i,:) * P2 - v * tan(arg.steer_angle_max / arg.l);
                 b1 = arg.steer_max_q1*exp(arg.steer_max_q2*c);
 
-                c = arg.steer_angle_min - U(i,:) * P2;
+                c = v * tan(arg.steer_angle_min / arg.l) - U(i,:) * P2;
                 b2 = arg.steer_min_q1*exp(arg.steer_min_q2*c);
                 
                 b_steer_limit = b1 + b2;

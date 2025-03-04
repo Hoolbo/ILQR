@@ -10,13 +10,13 @@ function [df_dx, df_du] = ilqr_getABMatrix(Xin, Uin)
         f = [
             x(1) + x(4) * cos(x(3) + beta) * arg.dt;
             x(2) + x(4) * sin(x(3) + beta) * arg.dt;
-            x(3) + (x(4) / arg.lr) * sin(beta) * arg.dt;
+            x(3) + (x(4) / arg.l) * tan(beta) * arg.dt;
             x(4) + u(1) * arg.dt;
         ];
     end
 
     % 计算雅可比矩阵（有限差分）
-    delta = 1e-5; % 设置扰动值
+    delta = 1e-6; % 设置扰动值
     for i = 1:arg.N
         x0 = Xin(i, :)';
         u0 = Uin(i, :)';
