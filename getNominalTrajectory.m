@@ -50,7 +50,7 @@ end
 %     end
 % 
 % end
-
+% 
 % function[Xnominal] = rollout(X0,Unominal)
 %      global arg
 %      Xnominal(1,:) = X0;

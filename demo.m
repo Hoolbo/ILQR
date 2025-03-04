@@ -5,7 +5,7 @@ function demo
     %载入参数
     arguments();
     %状态变量 x X坐标 y Y坐标 phi 航向角 v 速度
-    X = [ 270 ; 1.24 ; 0 ; arg.startSpeed;];
+    X = [ 200 ; 1.24 ; 0 ; arg.startSpeed;];
     %控制变量 a 加速度 delta 前轮转角（弧度）
     % U = [ a ; delta ];
     %% 记录行驶过的轨迹
