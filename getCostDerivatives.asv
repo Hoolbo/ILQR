@@ -17,18 +17,17 @@ function [lx, lu, lxx, luu, lux] = getCostDerivatives(Xin, U)
         lx(i,:) = 2 * arg.Q * [Xin(i, 1) - x_r; Xin(i, 2) - y_r; Xin(i, 3) - theta_r; Xin(i, 4) - arg.desireSpeed];
         lxx(i,:,:) = 2 * arg.Q;
         % ---- 障碍物代价计算 ----
-        if arg.is_cal_obs_cost
-            [~,db_obs, ddb_obs] = obstacle(Xin(i, 1), Xin(i, 2),obs_x,obs_y);
+        if cal_obs
+            [b_obs,db_obs, ddb_obs] = obstacle(Xin(i, 1), Xin(i, 2),obs_x,obs_y);
             obs_x(1) = obs_x(1) + arg.obs_dx;
         else
-            db_obs = 0;
-            ddb_obs = 0;
+            
         end
 
         
         % ---- 道路边界代价计算 ----
         % 左侧约束
-        if arg.is_cal_lane_cost
+        if cal_lane
             dX = [Xin(i,1), Xin(i,2)] - [x_r, y_r];
             nor_r = [-sin(theta_r), cos(theta_r)];
             l = dX * nor_r';
@@ -55,22 +54,13 @@ function [lx, lu, lxx, luu, lux] = getCostDerivatives(Xin, U)
         
         %%%%%%%%% 计算代价对于控制的导数
         %%%%转角约束
-        if arg.is_cal_steer_cost
-            v = Xin(i, 4);
-            c = U(i,:) * P2 - v * tan(arg.steer_angle_max / arg.l);
-            [b1, db1, ddb1] = barrierFunction(arg.steer_max_q1, arg.steer_max_q2, c, P2);
+        v = Xin(i, 4);
+        c = U(i,:) * P2 - v * tan(arg.steer_angle_max / arg.l);
+        [b1, db1, ddb1] = barrierFunction(arg.steer_max_q1, arg.steer_max_q2, c, P2);
 
-            c = v * tan(arg.steer_angle_min / arg.l) - U(i,:) * P2;
-            [b2, db2, ddb2] = barrierFunction(arg.steer_min_q1, arg.steer_min_q2, c, P2);
+        c = v * tan(arg.steer_angle_min / arg.l) - U(i,:) * P2;
+        [b2, db2, ddb2] = barrierFunction(arg.steer_min_q1, arg.steer_min_q2, c, P2);
 
-
-        else
-            db1 = 0;
-            db2 = 0;
-            ddb1 = 0;
-            ddb2 = 0;
-        end
-        
         lu(i,:) = 2 * arg.R * [U(i, 1); U(i, 2)] + db1 + db2;
         luu(i,:,:) = 2 * arg.R + ddb1 + ddb2;
         

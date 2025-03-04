@@ -1,4 +1,4 @@
-function [b,b_dot, b_ddot] = obstacleCostDerivatives(x, y,obs_x,obs_y)
+function [b,b_dot, b_ddot] = obstacle(x, y,obs_x,obs_y)
     global arg
     
     b = 0;
@@ -15,7 +15,7 @@ function [b,b_dot, b_ddot] = obstacleCostDerivatives(x, y,obs_x,obs_y)
         % c小于0满足约束  c大于0违反约束
         c = safe_distance - dist;   
         % 一阶导数
-        c_dot = [-1,-1,0,0];
+        c_dot = [-dx/dist,-dy/dist,0,0];
         % 返回代价的导数
         [b1,b1_dot,b1_ddot] = barrierFunction(arg.obs_q1,arg.obs_q2,c,c_dot);
         

@@ -10,6 +10,7 @@ global arg
         for i=1:arg.N
             [x_r,y_r,theta_r]= findClosestPoint(X(i+1,:));
             ref_state = [x_r; y_r; 0 ; arg.desireSpeed];
+            
             state_diff = X(i+1,:)' - ref_state;
 
             cost_state = state_diff' * arg.Q * state_diff;

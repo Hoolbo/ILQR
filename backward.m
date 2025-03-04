@@ -25,7 +25,7 @@ for i=arg.N:-1:1
     [U_Q_uu, s_Q_uu, V_Q_uu] = svd(Quu);
     s_Q_uu = diag(s_Q_uu);
     s_Q_uu = max(s_Q_uu, 0);
-    s_Q_uu = max(s_Q_uu,1e-8) + lamb;
+    s_Q_uu = max(s_Q_uu,1e-8) + lamb + 1e-6;
 
     Quu_inv = U_Q_uu' * diag(1.0./s_Q_uu) * V_Q_uu';
 
