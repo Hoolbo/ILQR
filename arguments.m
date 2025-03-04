@@ -18,7 +18,7 @@ arg.Q = [1, 0, 0, 0;
          0, 0, 0, 0;
          0, 0, 0, 0.5 ];
 arg.R = [0.5, 0;
-         0, 1 ];
+         0, 3 ];
 %%仿真参数
 arg.dt = 0.1;
 arg.tf = 1000;
@@ -27,10 +27,11 @@ arg.num_ctrl = 2;
 %% 地图参数
 load('map_info');
 map_start_index = 300;
-map_end_index = 1500;
+map_end_index = 1200;
 % map_end_index = length(xcoord);
 arg.trace_width = 6;
-arg.trace_safe_width = 3;
+arg.trace_safe_width_left = 3;
+arg.trace_safe_width_right = 3;
 arg.xcoord  = xcoord(map_start_index:map_end_index);
 arg.ycoord  = ycoord(map_start_index:map_end_index);
 arg.slength = slength(map_start_index:map_end_index);
@@ -38,12 +39,12 @@ arg.Curv    = Curv(map_start_index:map_end_index);
 arg.theta   = theta(map_start_index:map_end_index);
 
 %% ilqr参数
-arg.N = 50; %Horizon
+arg.N = 40; %Horizon
 arg.rel_tol = 1e-3;
 arg.tol = 1e-3;
 arg.max_iter = 200;
 arg.lamb_factor = 1.2;
-arg.lamb_init = 10;
+arg.lamb_init = 5;
 arg.lamb_max = 2000;
 arg.totalBarrierCost = 0;
 arg.startSpeed = 10;
@@ -57,13 +58,13 @@ arg.error_count = 0;
      
 %%障碍物参数
 
-arg.obs_x = [300,340,380,420,460];   % 障碍物 x 坐标
-arg.obs_y = [3,0.5,2,1.2,1.6];   % 障碍物 y 坐标
+arg.obs_x = [270,340,380,420,460];   % 障碍物 x 坐标
+arg.obs_y = [1.24,0.5,2,1.2,-4];   % 障碍物 y 坐标
 arg.obs_radius = [1,1,1,1,1]; % 障碍物半径
 % arg.obs_x = [320];   % 障碍物 x 坐标
 % arg.obs_y = [3];   % 障碍物 y 坐标
 % arg.obs_radius = [1]; % 障碍物半径
-arg.obs_dx = 0.05;
+arg.obs_dx = 0.3;
 
 %%车辆几何参数
 arg.ego_rad = 4;

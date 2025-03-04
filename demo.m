@@ -18,7 +18,7 @@ function demo
         tic
         [Xnew,Unew] = ilqr(X);
         toc
-        if arg.error_count >10
+        if arg.error_count >5
             error("连续求解失败次数大于10，停止仿真");
         end
         X = updateState(Xnew(1,:),Unew(1,:));

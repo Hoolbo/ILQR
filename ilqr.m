@@ -44,13 +44,13 @@ function[X,U] = ilqr(Xin)
             Jold = Jnew;
         else           
             lamb = lamb * arg.lamb_factor;
-            if(Jnew - Jold)<1e-5
-                arg.error_count = 0;
-                fprintf('迭代第%d次，求解成功\n',i);
-                arg.preX = X;
-                arg.preU = U;
-                break
-            end
+            % if(Jnew - Jold)<1e-5
+            %     arg.error_count = 0;
+            %     fprintf('迭代第%d次，求解成功\n',i);
+            %     arg.preX = X;
+            %     arg.preU = U;
+            %     break
+            % end
             if lamb > arg.lamb_max
                 arg.error_count = arg.error_count + 1;
                 fprintf('迭代第%d次，求解失败\n',i);

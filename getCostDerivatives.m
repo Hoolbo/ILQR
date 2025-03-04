@@ -32,11 +32,11 @@ function [lx, lu, lxx, luu, lux] = getCostDerivatives(Xin, U)
             dX = [Xin(i,1), Xin(i,2)] - [x_r, y_r];
             nor_r = [-sin(theta_r), cos(theta_r)];
             l = dX * nor_r';
-            c_left = l - arg.trace_safe_width;
+            c_left = l - arg.trace_safe_width_left;
             dc_left = [-sin(theta_r), cos(theta_r),0,0];
             [~, db_lane_left, ddb_lane_left] = barrierFunction(arg.lane_q1, arg.lane_q2, c_left, dc_left);
             % 右侧约束
-            c_right = -l - arg.trace_safe_width;  % 右侧约束，安全距离相同
+            c_right = -l - arg.trace_safe_width_right;  % 右侧约束，安全距离相同
             dc_right = -dc_left;  % 导数方向相反
             [~, db_lane_right, ddb_lane_right] = barrierFunction(arg.lane_q1, arg.lane_q2, c_right, dc_right);
             % 合并代价

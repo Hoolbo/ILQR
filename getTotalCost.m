@@ -28,10 +28,10 @@ global arg
                 dX = [X(i,1),X(i,2)] - [x_r,y_r];
                 nor_r = [-sin(theta_r),cos(theta_r)];
                 l = dX * nor_r';
-                c_left = l - arg.trace_safe_width;
+                c_left = l - arg.trace_safe_width_left;
                 b_lane_left = arg.lane_q1*exp(arg.lane_q2*c_left);
                 %%右侧车道偏离代价
-                c_right = -l - arg.trace_safe_width;  % 右侧约束，安全距离相同
+                c_right = -l - arg.trace_safe_width_right;  % 右侧约束，安全距离相同
                 b_lane_right = arg.lane_q1*exp(arg.lane_q2*c_right);
                 b_lane = b_lane_left + b_lane_right;
             else
