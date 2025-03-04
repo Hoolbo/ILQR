@@ -49,11 +49,10 @@ arg.R = [2, 0;
 % arg.obs_x = [300,340,380,420,460];   % 障碍物 x 坐标
 % arg.obs_y = [2,0.5,1,1.2,1.6];   % 障碍物 y 坐标
 % arg.obs_radius = [1,1,1,1,1]; % 障碍物半径
-arg.obs_x = [320,300];   % 障碍物 x 坐标
-arg.obs_y = [0.5,1];   % 障碍物 y 坐标
-arg.obs_radius = [1,1]; % 障碍物半径
-arg.obs_dx = 0.2;
-
+arg.obs_x = [290];   % 障碍物 x 坐标
+arg.obs_y = [0.5];   % 障碍物 y 坐标
+arg.obs_radius = [1]; % 障碍物半径
+arg.obs_dx = 0.3;
 
 %%车辆几何参数
 arg.ego_rad = 5;
@@ -63,8 +62,6 @@ arg.l = 2.73;
 arg.width = 1.5;
 arg.steer_angle_max = 1;
 arg.steer_angle_min = -1;
-
-
 
 %%纯跟踪参数
 arg.Kv = 0.3; %前视距离系数
