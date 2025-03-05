@@ -1,6 +1,6 @@
-function [] = getLocalPlan(Xin)
+function [] = getLocalPlan(X0)
 global arg
-    temp = (Xin(1)-arg.xcoord(:)).^2 + (Xin(2)-arg.ycoord(:)).^2;
+    temp = (X0(1)-arg.xcoord(:)).^2 + (X0(2)-arg.ycoord(:)).^2;
     mintemp = min(temp);
     index = find(mintemp == temp);
     arg.localPlan = zeros(arg.N,3);

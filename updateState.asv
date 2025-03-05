@@ -9,7 +9,7 @@ function [Xout] = updateState(Xin,U)
     beta = atan((arg.lr / (arg.lr + arg.lf)) * tan(delta));
     xout = x + v * cos(phi + beta) * arg.dt;
     yout = y + v * sin(phi + beta) * arg.dt;
-    phiout = phi + (v / arg.l) * tan(delta) * arg.dt;
+    phiout = phi + (v / arg.l) * tan() * arg.dt;
     vout = v + a * arg.dt;
     Xout = [xout; yout; phiout; vout];
 end

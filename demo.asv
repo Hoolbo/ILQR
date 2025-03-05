@@ -16,16 +16,16 @@ function demo
         fprintf('===================== 仿真第%d步 ==================\n ',i);
         arg.obs_x(1) = arg.obs_x(1) + arg.obs_dx;
         tic
-        [X_trajectory,U_sequence] = ilqr(X0);
+        [X,Unew] = ilqr(X0);
         toc
         if arg.error_count >5
             error("连续求解失败次数大于10，停止仿真");
         end
-        X0 = updateState(X0,U_sequence(1,:));
-        Xlog(1:2,i) = X0(1:2);
-
+        X0 = updateState(Xnew(1,:),Unew(1,:));
+        Xlog(1:2,i) = X(1:2);
+        % fprintf('速度V=%f\n前轮转角=%f\n',X(4),rad2deg(Unew(1,2)));
         %画图
-        Ploting(Xlog,X_trajectory,U_sequence,i);
+        Ploting(Xlog,Xnew,Unew,i);
     end
 end
 

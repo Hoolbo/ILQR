@@ -1,11 +1,11 @@
-function[X,U] = ilqr(Xin)
+function[X,U] = ilqr(X0)
     global arg
 
     %%获取局部路径
-    getLocalPlan(Xin);
+    getLocalPlan(X0);
 
     %%获取粗解（粗控制和粗轨迹）
-    [X,U] = getNominalTrajectory(Xin);
+    [X,U] = getNominalTrajectory(X0);
 
     %%求粗解的代价
     Jold = getTotalCost(X,U);
@@ -27,7 +27,7 @@ function[X,U] = ilqr(Xin)
         if Jnew <Jold 
             X = Xnew;
             U = Unew;
-%             lamb = lamb / arg.lamb_factor;
+            % lamb = lamb / arg.lamb_factor;
             % 修改后：根据成本下降比例调整λ
             if (Jold - Jnew)/Jold > 0.1  % 成本显著下降
                 lamb = max(lamb / 2, 1e-6); % 激进降低λ
@@ -44,13 +44,6 @@ function[X,U] = ilqr(Xin)
             Jold = Jnew;
         else           
             lamb = lamb * arg.lamb_factor;
-            % if(Jnew - Jold)<1e-5
-            %     arg.error_count = 0;
-            %     fprintf('迭代第%d次，求解成功\n',i);
-            %     arg.preX = X;
-            %     arg.preU = U;
-            %     break
-            % end
             if lamb > arg.lamb_max
                 arg.error_count = arg.error_count + 1;
                 fprintf('迭代第%d次，求解失败\n',i);
