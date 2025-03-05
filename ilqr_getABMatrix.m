@@ -10,7 +10,7 @@ function [df_dx, df_du] = ilqr_getABMatrix(Xin, Uin)
         f = [
             x(1) + x(4) * cos(x(3) + beta) * arg.dt;
             x(2) + x(4) * sin(x(3) + beta) * arg.dt;
-            x(3) + (x(4) / arg.l) * tan(u(2)) * arg.dt;
+            x(3) + (x(4) / arg.l) * tan(u(2)) * cos(beta) * arg.dt;
             x(4) + u(1) * arg.dt;
         ];
     end
