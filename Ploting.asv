@@ -1,4 +1,4 @@
-function [] = Ploting(Xlog, Xnew, Unew,i,arg,step_time)
+function [] = Ploting(Xlog, Xnew, Unew,i,arg,step_)
     persistent fig_handle car_handle traj_handle pred_handle obs_handles;
 
     % 初始化图形窗口
@@ -84,8 +84,7 @@ function [] = Ploting(Xlog, Xnew, Unew,i,arg,step_time)
     end
     
     % 更新标题
-    title(sprintf(['Iteration: %d  单步时间: %.f ms\n' ...
-        '           Speed: %.2f m/s  Accel: %.2f m/s²  Steer %.2f°  \n '], ...
-                  i,step_time * 1000,Xnew(1,4), Unew(1,1), rad2deg(Unew(1,2))));
+    title(sprintf('Iteration: %d\nSpeed: %.2f m/s  Accel: %.2f m/s²  Steer %.1f°  \n averageTime: %.2f s', ...
+                  i, Xnew(1,4), Unew(1,1), rad2deg(Unew(1,2))),average_time);
     drawnow;
 end

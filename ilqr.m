@@ -14,6 +14,7 @@ function[X,U,success] = ilqr(X0,arg)
     
     
     for i=1:arg.max_iter
+        fprintf('迭代第%d次\n',i);
         %%反向传播获得反馈系数
         [k,K] = backward(X,U,lamb,local_plan,arg);
         %%正向传播roll out出新轨迹
@@ -42,10 +43,17 @@ function[X,U,success] = ilqr(X0,arg)
         else           
             lamb = lamb * arg.lamb_factor;
             if lamb > arg.lamb_max
-                fprintf('迭代第%d次，求解失败\n',i);
+                fprintf('迭代第%d次，超过lamb最大值求解失败\n',i);
                 success = false;
                 break;
             end
         end
     end
+    if i == arg.max_iter 
+                fprintf('迭代第%d次，超过最大迭代次数求解失败\n',i);
+                success = false;
+    end
+
+
+
 end

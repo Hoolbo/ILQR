@@ -3,7 +3,7 @@ function[Xnominal,Unominal] = getNominalTrajectory(X_cur,local_plan,arg)
 Xnominal = zeros(arg.N+1,arg.num_states);
 %规划起点赋值
 Xnominal(1,:) = X_cur(:);
-Unominal = ones(arg.N,arg.num_ctrl) * 0.1;
+Unominal = ones(arg.N,arg.num_ctrl) * 0.05;
 
 if isnan(arg.preU)
     %没有上一帧的控制序列 用纯跟踪获取控制序列并roll out出轨迹

@@ -48,20 +48,6 @@ function [df_dx, df_du] = get_dynamics_jacobians(Xin, Uin, arg)
                               0  ,                          v*cos(phi+beta)*dbeta_ddelta * arg.dt                             ;
                               0  ,  (v/arg.l) * arg.dt * (sec(delta)*sec(delta)*cos(beta) - tan(delta)*sin(beta)*dbeta_ddelta);
                          arg.dt  ,                                          0                                                ];
-
-        % 计算 df_dx
-        for j = 1:arg.num_states
-            dx = zeros(arg.num_states, 1);
-            dx(j) = delta;
-            df_dx_test(i, :, j) = (dynamics(x0 + dx, u0) - dynamics(x0, u0)) / delta;
-        end
-
-        % 计算 df_du
-        for j = 1:arg.num_ctrl
-            du = zeros(arg.num_ctrl, 1);
-            du(j) = delta;
-            df_du_test(i, :, j) = (dynamics(x0, u0 + du) - dynamics(x0, u0)) / delta;
-        end
     end
     
 end
