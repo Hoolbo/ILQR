@@ -21,7 +21,7 @@ else
 
     %用获得的控制信号rollout出轨迹
     for i=1:arg.N
-        Xout = updateState(X_cur,Unominal(i,:));
+        Xout = updateState(X_cur,Unominal(i,:),arg);
         Xnominal(i+1,:) = Xout(:);
         X_cur = Xout;
     end

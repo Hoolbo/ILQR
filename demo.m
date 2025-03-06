@@ -15,13 +15,14 @@ function demo
         fprintf('===================== 仿真第%d步 ==================\n ',i);
         arg.obs_x(1) = arg.obs_x(1) + arg.obs_dx;
         tic
-        [X_trajectory,U_sequence] = ilqr(X0,arg);
+        [X_trajectory,U_sequence,arg] = ilqr(X0,arg);
         toc
         if arg.error_count >5
             error("连续求解失败次数大于10，停止仿真");
         end
-        X0 = updateState(X0,U_sequence(1,:),arg);
-        Xlog(1:2,i) = X0(1:2);
+
+        X0 = X_trajectory(2,:);
+        Xlog(:,i) = X0;
 
         %画图
         Ploting(Xlog,X_trajectory,U_sequence,i,arg);

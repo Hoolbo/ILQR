@@ -1,4 +1,4 @@
-function[X,U] = ilqr(X0,arg)
+function[X,U,arg] = ilqr(X0,arg)
 
     %%获取局部路径
     local_plan = getLocalPlan(X0,arg);
