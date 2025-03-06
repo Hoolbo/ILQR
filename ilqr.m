@@ -1,4 +1,4 @@
-function[X,U,arg] = ilqr(X0,arg)
+function[X,U,success] = ilqr(X0,arg)
 
     %%获取局部路径
     local_plan = getLocalPlan(X0,arg);
@@ -34,20 +34,16 @@ function[X,U,arg] = ilqr(X0,arg)
                 lamb = min(lamb * 5, arg.lamb_max); % 保守增加λ
             end
             if (Jold - Jnew)/Jold < arg.rel_tol
-                arg.error_count = 0;
                 fprintf('迭代第%d次，求解成功\n',i);
-                arg.preX = X;
-                arg.preU = U;
+                success = true;
                 break;
             end
             Jold = Jnew;
         else           
             lamb = lamb * arg.lamb_factor;
             if lamb > arg.lamb_max
-                arg.error_count = arg.error_count + 1;
                 fprintf('迭代第%d次，求解失败\n',i);
-                arg.preX = arg.preX_nan;
-                arg.preU = arg.preX_nan;
+                success = false;
                 break;
             end
         end

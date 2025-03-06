@@ -27,35 +27,3 @@ else
     end
 end
 end
-
-% function [Xnominal, Unominal] = getNominalTrajectory(Xin)
-%     global arg
-%     if ~isnan(arg.preU)
-%         % 复用上一帧控制序列的后半部分
-%         Unominal = [arg.preU(2:end,:); arg.preU(end,:)];
-%     else
-%         % 使用速度控制+ Pure Pursuit
-%         Unominal(:,1) = (arg.desireSpeed - Xin(4)) * 0.3; % 加速度控制
-%         for i=1:arg.N
-%             Unominal(i,2) = purePursuit(Xin);
-%             Xin = updateState(Xin, Unominal(i,:));
-%         end
-%     end
-%     % Rollout轨迹
-%     for i=1:arg.N
-%         Xout = updateState(Xin,Unominal(i,:));
-%         Xnominal(i+1,:) = Xout(:);
-%         Xin = Xout;
-%     end
-% 
-% end
-% 
-% function[Xnominal] = rollout(X0,Unominal)
-%      global arg
-%      Xnominal(1,:) = X0;
-%      X = X0;
-%      for i=1:arg.N
-%         X = updateState(X,Unominal(i,:));
-%         Xnominal(i+1,:) = X;
-%      end
-% end

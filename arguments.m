@@ -10,15 +10,15 @@ arg.steer_max_q1 = 1;
 arg.steer_max_q2 = 1;
 arg.steer_min_q1 = 1;
 arg.steer_min_q2 = 1;
-arg.lane_q1 = 1;
-arg.lane_q2 = 1;
+arg.lane_q1 = 3;
+arg.lane_q2 = 2;
 arg.obs_q1 = 1;
 arg.obs_q2 = 1;
 %% Q状态代价矩阵 | R控制代价矩阵
-arg.Q = [2, 0, 0, 0;
-         0, 2, 0, 0;
+arg.Q = [1, 0, 0, 0;
+         0, 1, 0, 0;
          0, 0, 0, 0;
-         0, 0, 0, 0.5 ];
+         0, 0, 0, 0.1 ];
 arg.R = [0.5, 0;
          0, 2 ];
 %%仿真参数
@@ -29,7 +29,7 @@ arg.num_ctrl = 2;
 %% 地图参数
 load('map_info');
 map_start_index = 300;
-map_end_index = 1200;
+map_end_index = 2000;
 % map_end_index = length(xcoord);
 arg.trace_width = 6;
 arg.trace_safe_width_left = 3;
@@ -41,7 +41,7 @@ arg.Curv    = Curv(map_start_index:map_end_index);
 arg.theta   = theta(map_start_index:map_end_index);
 
 %% ilqr参数
-arg.N = 40; %Horizon
+arg.N = 50; %Horizon
 arg.rel_tol = 1e-3;
 arg.tol = 1e-3;
 arg.max_iter = 200;
