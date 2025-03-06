@@ -16,7 +16,7 @@ function demo
         fprintf('===================== 仿真第%d步 ==================\n ',i);
         arg.obs_x(1) = arg.obs_x(1) + arg.obs_dx;
         tic
-        [X_trajectory,U_sequence,success] = ilqr(X0,arg);
+        [X_trajectory,U_sequence,success] = ilqr(X!0,arg);
         toc
         if success == true
             error_count = 0;

@@ -10,15 +10,15 @@ arg.steer_max_q1 = 1;
 arg.steer_max_q2 = 1;
 arg.steer_min_q1 = 1;
 arg.steer_min_q2 = 1;
-arg.lane_q1 = 3;
-arg.lane_q2 = 2;
+arg.lane_q1 = 2;
+arg.lane_q2 = 1;
 arg.obs_q1 = 1;
 arg.obs_q2 = 1;
 %% Q状态代价矩阵 | R控制代价矩阵
 arg.Q = [1, 0, 0, 0;
          0, 1, 0, 0;
          0, 0, 0, 0;
-         0, 0, 0, 0.1 ];
+         0, 0, 0, 1 ];
 arg.R = [0.5, 0;
          0, 2 ];
 %%仿真参数
