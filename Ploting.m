@@ -1,5 +1,4 @@
-function [] = Ploting(Xlog, Xnew, Unew,i)
-    global arg
+function [] = Ploting(Xlog, Xnew, Unew,i,arg)
     persistent fig_handle car_handle traj_handle pred_handle obs_handles;
 
     % 初始化图形窗口

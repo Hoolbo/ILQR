@@ -1,5 +1,4 @@
-function [Xout] = updateState(Xin,U)
-    global arg
+function [Xout] = updateState(Xin,U,arg)
     x = Xin(1);
     y = Xin(2);
     phi = Xin(3);

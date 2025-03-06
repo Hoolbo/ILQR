@@ -1,5 +1,7 @@
-function[] = arguments()
-global arg 
+function arg = arguments()
+
+arg = struct();
+
 %% 障碍函数约束参数
 arg.is_cal_obs_cost = 1;
 arg.is_cal_lane_cost = 1;
@@ -13,12 +15,12 @@ arg.lane_q2 = 1;
 arg.obs_q1 = 1;
 arg.obs_q2 = 1;
 %% Q状态代价矩阵 | R控制代价矩阵
-arg.Q = [1, 0, 0, 0;
-         0, 1, 0, 0;
+arg.Q = [2, 0, 0, 0;
+         0, 2, 0, 0;
          0, 0, 0, 0;
          0, 0, 0, 0.5 ];
 arg.R = [0.5, 0;
-         0, 3 ];
+         0, 2 ];
 %%仿真参数
 arg.dt = 0.1;
 arg.tf = 1000;
@@ -47,7 +49,7 @@ arg.lamb_factor = 1.2;
 arg.lamb_init = 5;
 arg.lamb_max = 2000;
 arg.totalBarrierCost = 0;
-arg.startSpeed = 10;
+arg.startSpeed = 5;
 arg.desireSpeed = 10;
 arg.preX = zeros(arg.N+1,arg.num_states) * nan;
 arg.preU = zeros(arg.N,arg.num_ctrl) * nan;
@@ -59,12 +61,12 @@ arg.error_count = 0;
 %%障碍物参数
 
 arg.obs_x = [270,340,380,420,460];   % 障碍物 x 坐标
-arg.obs_y = [1.24,0.5,2,1.2,-4];   % 障碍物 y 坐标
+arg.obs_y = [0,0.5,2,1.2,-4];   % 障碍物 y 坐标
 arg.obs_radius = [1,1,1,1,1]; % 障碍物半径
 % arg.obs_x = [320];   % 障碍物 x 坐标
 % arg.obs_y = [3];   % 障碍物 y 坐标
 % arg.obs_radius = [1]; % 障碍物半径
-arg.obs_dx = 0.3;
+arg.obs_dx = 0.05;
 
 %%车辆几何参数
 arg.ego_rad = 4;

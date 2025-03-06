@@ -1,14 +1,13 @@
-function[Jnew] = getTotalCost(X,U)
-%暂定
-Jnew = 0;
-global arg
+function[Jnew] = getTotalCost(X,U,local_plan,arg)
+    %暂定
+    Jnew = 0;
     %%计算和参考线的状态差代价和控制代价
         P2 = [0; 1];
         obs_x = arg.obs_x;
         obs_y = arg.obs_y;
         cost_constraint = 0;
         for i=1:arg.N
-            [x_r,y_r,theta_r]= findClosestPoint(X(i+1,:));
+            [x_r,y_r,theta_r]= findClosestPoint(X(i+1,:),local_plan);
             ref_state = [x_r; y_r; 0 ; arg.desireSpeed];
             state_diff = X(i+1,:)' - ref_state;
 
@@ -16,7 +15,7 @@ global arg
             cost_ctrl = U(i,:) * arg.R * U(i,:)';
             if arg.is_cal_obs_cost
                 %%计算障碍物代价
-               [b_obs,~, ~] = obstacle(X(i, 1), X(i, 2),obs_x,obs_y);
+               [b_obs,~, ~] = obstacle(X(i, 1), X(i, 2),obs_x,obs_y,arg);
             else
                 b_obs = 0;
             end

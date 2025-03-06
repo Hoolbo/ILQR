@@ -1,5 +1,4 @@
-function [df_dx, df_du] = ilqr_getABMatrix(Xin, Uin)
-    global arg
+function [df_dx, df_du] = ilqr_getABMatrix(Xin, Uin, arg)
     % 预分配雅可比矩阵
     df_dx = zeros(arg.N, arg.num_states, arg.num_states);
     df_du = zeros(arg.N, arg.num_states, arg.num_ctrl);

@@ -1,14 +1,13 @@
-function[X,U] = ilqr(X0)
-    global arg
+function[X,U] = ilqr(X0,arg)
 
     %%获取局部路径
-    getLocalPlan(X0);
+    local_plan = getLocalPlan(X0,arg);
 
     %%获取粗解（粗控制和粗轨迹）
-    [X,U] = getNominalTrajectory(X0);
+    [X,U] = getNominalTrajectory(X0,local_plan,arg);
 
     %%求粗解的代价
-    Jold = getTotalCost(X,U);
+    Jold = getTotalCost(X,U,local_plan,arg);
 
     %%初始正则化系数lamb
     lamb = arg.lamb_init;
@@ -16,11 +15,11 @@ function[X,U] = ilqr(X0)
     
     for i=1:arg.max_iter
         %%反向传播获得反馈系数
-        [k,K] = backward(X,U,lamb);
+        [k,K] = backward(X,U,lamb,local_plan,arg);
         %%正向传播roll out出新轨迹
-        [Xnew,Unew] = forward(X,U,k,K);
+        [Xnew,Unew] = forward(X,U,k,K,local_plan,arg);
         %%求新轨迹和控制的代价
-        Jnew = getTotalCost(Xnew,Unew);
+        Jnew = getTotalCost(Xnew,Unew,local_plan,arg);
     %     fprintf('Iter %d | λ=%.2f | Jold-Jnew=%.6f | Jold=%.2f\n',i,lamb,Jold-Jnew,Jold);
 
         %%收敛判断
