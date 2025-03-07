@@ -11,10 +11,10 @@ function [] = Ploting(Xlog, Xnew, Unew,i,arg)
         ylabel('Y Position (m)');
         
         % --- 新增：计算参考路径的范围并设置坐标轴 ---
-        xmin = min(arg.xcoord) ;  % 左边距50米
-        xmax = max(arg.xcoord) ;  % 右边距50米
+        xmin = min(arg.xcoord) - 50 ;  % 左边距50米
+        xmax = max(arg.xcoord) + 50 ;  % 右边距50米
         ymin = min(arg.ycoord) - 20;  % 下边距20米
-        ymax = max(arg.ycoord) ;  % 上边距20米
+        ymax = max(arg.ycoord) + 20;  % 上边距20米
         axis([xmin xmax ymin ymax]);   % 固定显示范围
         
         % 绘制静态元素（仅一次）

@@ -39,6 +39,7 @@ arg.num_states = 4;
 arg.num_ctrl = 2;
 %% 地图参数
 load('map_info');
+% load('map_info2');
 map_start_index = 300;
 map_end_index = 2000;
 % map_end_index = length(xcoord);
@@ -72,13 +73,13 @@ arg.error_count = 0;
 
 %%障碍物参数
 
-arg.obs_x = [270,340,380,420,440];   % 障碍物 x 坐标
-arg.obs_y = [0,0.5,2,1.2,-3];   % 障碍物 y 坐标
+arg.obs_x = [270,340,370,420,440];   % 障碍物 x 坐标
+arg.obs_y = [0,0,2,-2,-3];   % 障碍物 y 坐标
 arg.obs_radius = [1,1,1,1,1]; % 障碍物半径
 % arg.obs_x = [320];   % 障碍物 x 坐标
 % arg.obs_y = [3];   % 障碍物 y 坐标
 % arg.obs_radius = [1]; % 障碍物半径
-arg.obs_dx = 0.1;
+arg.obs_dx = 0.2;
 
 
 %%车辆几何参数

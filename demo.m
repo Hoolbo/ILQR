@@ -4,7 +4,7 @@ function demo
     %载入参数
     arg = arguments();
     %状态变量 x X坐标 y Y坐标 phi 航向角 v 速度
-    start_index = 50;
+    start_index = 1;
     X0 = [ arg.xcoord( start_index) ; arg.ycoord( start_index) ; arg.theta( start_index) ; arg.startSpeed;];
 
     %控制变量 a 加速度 delta 前轮转角（弧度）
