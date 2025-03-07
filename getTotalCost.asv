@@ -1,19 +1,22 @@
-function[J_total] = getTotalCost(X,U,local_plan,arg)
-        %%计算和参考线的状态差代价和控制代价
+function[Jnew] = getTotalCost(X,U,local_plan,arg)
+    %暂定
+    Jnew = 0;
+    %%计算和参考线的状态差代价和控制代价
         P2 = [0; 1];
         obs_x = arg.obs_x;
         obs_y = arg.obs_y;
         J_state_total = 0;
         J_ctrl_total = 0;
         J_constraint_total = 0;
-        
         %%计算状态代价
         for i=1:arg.N+1
              [x_r,y_r,theta_r]= findClosestPoint(X(i,:),local_plan);
              ref_state = [x_r; y_r; 0 ; arg.desireSpeed];
              state_diff = X(i,:)' - ref_state;
              cost_state = state_diff' * arg.Q * state_diff;
-               
+             
+             
+             
              if arg.is_cal_obs_cost
                 %%计算障碍物代价
                [cost_obs,~, ~] = obstacle(X(i, 1), X(i, 2),obs_x,obs_y,arg);
@@ -40,11 +43,11 @@ function[J_total] = getTotalCost(X,U,local_plan,arg)
              J_state_total = J_state_total + cost_state;
              J_constraint_total = J_constraint_total + cost_obs + cost_lane;
         end
-        
         %%计算控制代价
         for i=1:arg.N
+
             cost_ctrl = U(i,:) * arg.R * U(i,:)';
-            
+     
             if arg.is_cal_steer_cost
                 c = U(i,:) * P2 - arg.steer_angle_max;
                 b1 = arg.steer_max_q1*exp(arg.steer_max_q2*c);
@@ -56,9 +59,8 @@ function[J_total] = getTotalCost(X,U,local_plan,arg)
             else
                 cost_steer_limit = 0;
             end
-            
             J_ctrl_total = J_ctrl_total + cost_ctrl;
-            J_constraint_total = J_constraint_total + cost_steer_limit;
+            J_constraint_total = J_constraint_total + cost_obs + cost_lane;
         end
-        J_total = J_state_total + J_ctrl_total + J_constraint_total;
+
 end

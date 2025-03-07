@@ -21,6 +21,17 @@ arg.Q = [1, 0, 0, 0;
          0, 0, 0, 1 ];
 arg.R = [0.5, 0;
          0, 2 ];
+     
+%%障碍物参数
+arg.obs_x = [300,340,420,460];   % 障碍物 x 坐标
+arg.obs_y = [3,0.5,1.2,-3];   % 障碍物 y 坐标
+arg.obs_radius = [1,1,1,1]; % 障碍物半径
+% arg.obs_x = [320];   % 障碍物 x 坐标
+% arg.obs_y = [3];   % 障碍物 y 坐标
+% arg.obs_radius = [1]; % 障碍物半径
+arg.obs_dx = 0.05;
+     
+
 %%仿真参数
 arg.dt = 0.1;
 arg.tf = 1000;
@@ -58,6 +69,7 @@ arg.preU_nan = zeros(arg.N,arg.num_ctrl) * nan;
 arg.error_count = 0;
 
      
+
 %%障碍物参数
 
 arg.obs_x = [270,340,380,400,410,532];   % 障碍物 x 坐标
@@ -67,6 +79,7 @@ arg.obs_radius = [1,1,1,1,1,1]; % 障碍物半径
 % arg.obs_y = [3];   % 障碍物 y 坐标
 % arg.obs_radius = [1]; % 障碍物半径
 arg.obs_dx = 0.05;
+
 
 %%车辆几何参数
 arg.ego_rad = 4;

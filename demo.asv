@@ -4,8 +4,8 @@ function demo
     %载入参数
     arg = arguments();
     %状态变量 x X坐标 y Y坐标 phi 航向角 v 速度
-    start_index = 50;
-    X0 = [ arg.xcoord( start_index) ; arg.ycoord( start_index) ; arg.theta( start_index) ; arg.startSpeed;];
+
+    X0 = [ arg.xcoord(10) ; arg.ycoord ; 0 ; arg.startSpeed;];
 
     %控制变量 a 加速度 delta 前轮转角（弧度）
     % U = [ a ; delta ];
@@ -19,10 +19,7 @@ function demo
         arg.obs_x(1) = arg.obs_x(1) + arg.obs_dx;
         tic
         [X_trajectory,U_sequence,success] = ilqr(X0,arg);
-
-        step_time = toc;
-
-
+        toc
         if success == true
             error_count = 0;
             arg.preU = U_sequence;
@@ -39,7 +36,7 @@ function demo
 
 
         %画图
-        Ploting(Xlog,X_trajectory,U_sequence,i,arg,step_time);
+        Ploting(Xlog,X_trajectory,U_sequence,i,arg);
     end
 end
 
