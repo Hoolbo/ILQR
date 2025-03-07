@@ -1,4 +1,4 @@
-function [Xnew, Unew] = forward(X, U, k, K,local_plan,arg)
+function [Xnew, Unew,Jnew] = forward(X, U, k, K,local_plan,arg)
     
     persistent last_alpha  % 持久变量保存上一次成功的alpha
     if isempty(last_alpha)
@@ -41,5 +41,6 @@ function [Xnew, Unew] = forward(X, U, k, K,local_plan,arg)
 %         error('Line search failed: No suitable alpha found after %d iterations.', max_iterations);
     end
     
+    Jnew = getTotalCost(Xnew,Unew,local_plan,arg);
 
 end

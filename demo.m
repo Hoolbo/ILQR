@@ -19,7 +19,10 @@ function demo
         arg.obs_x(1) = arg.obs_x(1) + arg.obs_dx;
         tic
         [X_trajectory,U_sequence,success] = ilqr(X0,arg);
-        toc
+
+        step_time = toc;
+
+
         if success == true
             error_count = 0;
             arg.preU = U_sequence;
@@ -36,7 +39,7 @@ function demo
 
 
         %画图
-        Ploting(Xlog,X_trajectory,U_sequence,i,arg);
+        Ploting(Xlog,X_trajectory,U_sequence,i,arg,step_time);
     end
 end
 

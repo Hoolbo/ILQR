@@ -1,4 +1,4 @@
-function [] = Ploting(Xlog, Xnew, Unew,i,arg,step_time)
+function [] = Ploting(Xlog, Xnew, Unew,i,arg,step_)
     persistent fig_handle car_handle traj_handle pred_handle obs_handles;
 
     % 初始化图形窗口
@@ -11,10 +11,10 @@ function [] = Ploting(Xlog, Xnew, Unew,i,arg,step_time)
         ylabel('Y Position (m)');
         
         % --- 新增：计算参考路径的范围并设置坐标轴 ---
-        xmin = min(arg.xcoord) - 50 ;  % 左边距50米
-        xmax = max(arg.xcoord) + 50 ;  % 右边距50米
+        xmin = min(arg.xcoord) ;  % 左边距50米
+        xmax = max(arg.xcoord) ;  % 右边距50米
         ymin = min(arg.ycoord) - 20;  % 下边距20米
-        ymax = max(arg.ycoord) + 20;  % 上边距20米
+        ymax = max(arg.ycoord) ;  % 上边距20米
         axis([xmin xmax ymin ymax]);   % 固定显示范围
         
         % 绘制静态元素（仅一次）
@@ -84,8 +84,7 @@ function [] = Ploting(Xlog, Xnew, Unew,i,arg,step_time)
     end
     
     % 更新标题
-    title(sprintf(['Iteration: %d  单步时间: %.f ms\n' ...
-        '           Speed: %.2f m/s  Accel: %.2f m/s²  Steer %.2f°  \n '], ...
-                  i,step_time * 1000,Xnew(1,4), Unew(1,1), rad2deg(Unew(1,2))));
+    title(sprintf('Iteration: %d\nSpeed: %.2f m/s  Accel: %.2f m/s²  Steer %.1f°  \n averageTime: %.2f s', ...
+                  i, Xnew(1,4), Unew(1,1), rad2deg(Unew(1,2))),average_time);
     drawnow;
 end
