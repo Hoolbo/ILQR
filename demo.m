@@ -12,6 +12,7 @@ function demo
     %记录行驶过的轨迹
     Xlog = zeros(arg.num_states,arg.tf/arg.dt);
     error_count = 0;
+    %% 初始化障碍物轨迹
     obs_traj = arg.obs_traj;
     %% 仿真
     for i=1:arg.tf/arg.dt
