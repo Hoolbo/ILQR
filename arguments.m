@@ -8,7 +8,7 @@ arg.steer_max_q1 = 1;
 arg.steer_max_q2 = 1;
 arg.steer_min_q1 = 1;
 arg.steer_min_q2 = 1;
-arg.lane_q1 = 1;
+arg.lane_q1 = 2;
 arg.lane_q2 = 1;
 arg.obs_q1 = 1;
 arg.obs_q2 = 1;
@@ -19,6 +19,16 @@ arg.Q = [1, 0, 0, 0;
          0, 0, 0, 0.5 ];
 arg.R = [0.5, 0;
          0, 1 ];
+     
+%%障碍物参数
+arg.obs_x = [300,340,420,460];   % 障碍物 x 坐标
+arg.obs_y = [3,0.5,1.2,-3];   % 障碍物 y 坐标
+arg.obs_radius = [1,1,1,1]; % 障碍物半径
+% arg.obs_x = [320];   % 障碍物 x 坐标
+% arg.obs_y = [3];   % 障碍物 y 坐标
+% arg.obs_radius = [1]; % 障碍物半径
+arg.obs_dx = 0.05;
+     
 %%仿真参数
 arg.dt = 0.1;
 arg.tf = 1000;
@@ -38,7 +48,7 @@ arg.Curv    = Curv(map_start_index:map_end_index);
 arg.theta   = theta(map_start_index:map_end_index);
 
 %% ilqr参数
-arg.N = 30; %Horizon
+arg.N = 40; %Horizon
 arg.rel_tol = 1e-3;
 arg.tol = 1e-3;
 arg.max_iter = 200;
@@ -46,8 +56,8 @@ arg.lamb_factor = 1.2;
 arg.lamb_init = 10;
 arg.lamb_max = 2000;
 arg.totalBarrierCost = 0;
-arg.startSpeed = 0;
-arg.desireSpeed = 5;
+arg.startSpeed = 10;
+arg.desireSpeed = 10;
 arg.preX = zeros(arg.N+1,arg.num_states) * nan;
 arg.preU = zeros(arg.N,arg.num_ctrl) * nan;
 arg.preX_nan = zeros(arg.N+1,arg.num_states) * nan;
@@ -55,14 +65,7 @@ arg.preU_nan = zeros(arg.N,arg.num_ctrl) * nan;
 arg.error_count = 0;
 
      
-%%障碍物参数
-arg.obs_x = [300,340,380,420,460];   % 障碍物 x 坐标
-arg.obs_y = [3,0.5,1.5,1.2,1.6];   % 障碍物 y 坐标
-arg.obs_radius = [1,1,1,1,1]; % 障碍物半径
-% arg.obs_x = [320];   % 障碍物 x 坐标
-% arg.obs_y = [3];   % 障碍物 y 坐标
-% arg.obs_radius = [1]; % 障碍物半径
-arg.obs_dx = 0.05;
+
 
 
 %%车辆几何参数
