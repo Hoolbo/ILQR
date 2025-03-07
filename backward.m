@@ -1,8 +1,8 @@
-function[k,K] = backward(X,U,lamb,local_plan,arg)
+function[k,K] = backward(X,U,lamb,local_plan,obs_traj,arg)
 %%求系统动力学方程对状态x，控制u的雅可比矩阵
 [df_dx,df_du] = get_dynamics_jacobians(X(1:end-1,:),U,arg);
 %%求代价函数l对x,u的各阶导数
-[lx,lu,lxx,luu,lux] = get_cost_derivatives(X,U,local_plan,arg);
+[lx,lu,lxx,luu,lux] = get_cost_derivatives(X,U,local_plan,obs_traj,arg);
 %%初始化V_x和V_xx为最终步的代价函数l对x的雅可比矩阵和海森矩阵
 V_x = lx(end,:)';
 V_xx = squeeze(lxx(end,:,:))';

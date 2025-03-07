@@ -1,4 +1,4 @@
-function [lx, lu, lxx, luu, lux] = get_cost_derivatives(X_traj, U, local_plan, arg)
+function [lx, lu, lxx, luu, lux] = get_cost_derivatives(X_traj, U, local_plan, obs_traj,arg)
 
     lx = zeros(arg.N+1, arg.num_states);
     lxx = zeros(arg.N+1, arg.num_states, arg.num_states);
@@ -9,18 +9,18 @@ function [lx, lu, lxx, luu, lux] = get_cost_derivatives(X_traj, U, local_plan, a
     P1 = [1; 0];
     P2 = [0; 1];
     arg.totalBarrierCost = 0;
-    obs_x = arg.obs_x;
-    obs_y = arg.obs_y;
+
     for i = 1:arg.N+1
         %%%%%%%%%%% 计算代价对于状态的导数
         [x_r, y_r, theta_r] = findClosestPoint(X_traj(i,:),local_plan);
         l_dx = 2 * arg.Q * [X_traj(i, 1) - x_r; X_traj(i, 2) - y_r; X_traj(i, 3) - theta_r; X_traj(i, 4) - arg.desireSpeed];
         l_ddx = 2 * arg.Q;
         
+        obs_x = obs_traj(i,:,1);
+        obs_y = obs_traj(i,:,2);
         % ---- 障碍物代价计算 ----
         if arg.is_cal_obs_cost
             [~,db_obs, ddb_obs] = obstacle(X_traj(i, 1), X_traj(i, 2),obs_x,obs_y,arg);
-            obs_x(1) = obs_x(1) + arg.obs_dx;
         else
             db_obs = 0;
             ddb_obs = 0;

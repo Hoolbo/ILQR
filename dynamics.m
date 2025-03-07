@@ -1,4 +1,4 @@
-function [f] = updateState(Xin,U,arg)
+function [f] = dynamics(Xin,U,arg)
     x = Xin(1);
     y = Xin(2);
     phi = Xin(3);

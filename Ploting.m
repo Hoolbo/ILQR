@@ -1,9 +1,9 @@
-function [] = Ploting(Xlog, Xnew, Unew,i,arg,step_time)
+function [] = Ploting(Xlog, Xnew, Unew,i,arg,step_time,obs_traj)
     persistent fig_handle car_handle traj_handle pred_handle obs_handles;
 
     % 初始化图形窗口
     if isempty(fig_handle) || ~isvalid(fig_handle)
-        fig_handle = figure('Name', 'ILQR轨迹优化', 'NumberTitle', 'off');
+        fig_handle = figure('Name', 'ILQR轨迹优化', 'NumberTitle', 'off','WindowState', 'maximized');
         axis equal;
         hold on;
         zoom on;
@@ -30,10 +30,10 @@ function [] = Ploting(Xlog, Xnew, Unew,i,arg,step_time)
         plot(right_lane_x, right_lane_y, '-', 'Color', color_lane, 'LineWidth', 1.5);
         
         % 初始化障碍物图形对象
-        obs_handles = gobjects(1, length(arg.obs_x)); % 预分配句柄数组
-        for idx = 1:length(arg.obs_x)
-            pos = [arg.obs_x(idx)-arg.obs_radius(idx), arg.obs_y(idx)-arg.obs_radius(idx),...
-                   2*arg.obs_radius(idx), 2*arg.obs_radius(idx)];
+        obs_handles = gobjects(1, arg.obs_num); % 预分配句柄数组
+        for idx = 1:arg.obs_num
+            pos = [obs_traj(1,idx,1)-arg.obs_radius, obs_traj(1,idx,2)-arg.obs_radius,...
+                   2*arg.obs_radius, 2*arg.obs_radius];
             obs_handles(idx) = rectangle('Position', pos, 'FaceColor', 'k', 'EdgeColor', 'none');
         end
     else
@@ -43,11 +43,10 @@ function [] = Ploting(Xlog, Xnew, Unew,i,arg,step_time)
     % 动态更新障碍物位置（每次迭代更新）
     if ~isempty(obs_handles)
         for idx = 1:length(obs_handles)
-            if idx <= length(arg.obs_x) && isvalid(obs_handles(idx))
+            if idx <= arg.obs_num && isvalid(obs_handles(idx))
                 % 计算新位置
-                new_pos = [arg.obs_x(idx)-arg.obs_radius(idx),...
-                          arg.obs_y(idx)-arg.obs_radius(idx),...
-                          2*arg.obs_radius(idx), 2*arg.obs_radius(idx)];
+                new_pos = [obs_traj(1,idx,1)-arg.obs_radius, obs_traj(1,idx,2)-arg.obs_radius,...
+                   2*arg.obs_radius, 2*arg.obs_radius];
                 % 更新图形属性
                 set(obs_handles(idx), 'Position', new_pos);
             end

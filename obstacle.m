@@ -9,7 +9,7 @@ function [b,b_dot, b_ddot] = obstacle(x, y,obs_x,obs_y,arg)
         dist = sqrt(dx^2 + dy^2);       % 计算距离
 
         % 障碍物代价计算：若距离小于安全阈值，产生代价
-        safe_distance = arg.obs_radius(i) + arg.ego_rad;  % 安全距离
+        safe_distance = arg.obs_radius + arg.ego_rad;  % 安全距离
         % c小于0满足约束  c大于0违反约束
         c = safe_distance - dist;   
         % 一阶导数

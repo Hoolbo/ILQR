@@ -1,6 +1,8 @@
-function[J_total] = getTotalCost(X,U,local_plan,obs_traj,arg)
+function[J_total] = getTotalCost(X,U,local_plan,arg)
         %%计算和参考线的状态差代价和控制代价
         P2 = [0; 1];
+        obs_x = arg.obs_x;
+        obs_y = arg.obs_y;
         J_state_total = 0;
         J_ctrl_total = 0;
         J_constraint_total = 0;
@@ -11,14 +13,14 @@ function[J_total] = getTotalCost(X,U,local_plan,obs_traj,arg)
              ref_state = [x_r; y_r; 0 ; arg.desireSpeed];
              state_diff = X(i,:)' - ref_state;
              cost_state = state_diff' * arg.Q * state_diff;
-             obs_x = obs_traj(i,:,1);
-             obs_y = obs_traj(i,:,2);
+             obs_x = arg.obs_
              if arg.is_cal_obs_cost
                 %%计算障碍物代价
                [cost_obs,~, ~] = obstacle(X(i, 1), X(i, 2),obs_x,obs_y,arg);
              else
                 cost_obs = 0;
              end
+             obs_x(1) = obs_x(1) + arg.obs_dx;
              
              if arg.is_cal_lane_cost
                 %%左侧车道偏离代价

@@ -9,7 +9,7 @@ if isnan(arg.preU)
     %没有上一帧的控制序列 用纯跟踪获取控制序列并roll out出轨迹
     for i=1:arg.N
         Unominal(i,2) = purePursuit(X_cur,local_plan,arg);
-        Xout = updateState(X_cur,Unominal(i,:),arg);
+        Xout = dynamics(X_cur,Unominal(i,:),arg);
         Xnominal(i+1,:) = Xout(:);
         X_cur = Xout;
     end
@@ -21,7 +21,7 @@ else
 
     %用获得的控制信号rollout出轨迹
     for i=1:arg.N
-        Xout = updateState(X_cur,Unominal(i,:),arg);
+        Xout = dynamics(X_cur,Unominal(i,:),arg);
         Xnominal(i+1,:) = Xout(:);
         X_cur = Xout;
     end
