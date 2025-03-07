@@ -1,21 +1,22 @@
 function [lx, lu, lxx, luu, lux] = getCostDerivatives(Xin, U,local_plan, arg)
 
-    lx = zeros(arg.N, arg.num_states);
-    lxx = zeros(arg.N, arg.num_states, arg.num_states);
-    lu = zeros(arg.N, arg.num_ctrl);
-    luu = zeros(arg.N, arg.num_ctrl, arg.num_ctrl);
-    lux = zeros(arg.N, arg.num_ctrl, arg.num_states); 
-
+    lx = zeros(arg.N+1, arg.num_states);
+    lxx = zeros(arg.N+1, arg.num_states, arg.num_states);
+    lu = zeros(arg.N+1, arg.num_ctrl);
+    luu = zeros(arg.N+1, arg.num_ctrl, arg.num_ctrl);
+    lux = zeros(arg.N+1, arg.num_ctrl, arg.num_states); 
+    
     P1 = [1; 0];
     P2 = [0; 1];
     arg.totalBarrierCost = 0;
     obs_x = arg.obs_x;
     obs_y = arg.obs_y;
-    for i = 1:arg.N
+    for i = 1:arg.N+1
         %%%%%%%%%%% 计算代价对于状态的导数
         [x_r, y_r, theta_r] = findClosestPoint(Xin(i,:),local_plan);
         lx(i,:) = 2 * arg.Q * [Xin(i, 1) - x_r; Xin(i, 2) - y_r; Xin(i, 3) - theta_r; Xin(i, 4) - arg.desireSpeed];
         lxx(i,:,:) = 2 * arg.Q;
+        
         % ---- 障碍物代价计算 ----
         if arg.is_cal_obs_cost
             [~,db_obs, ddb_obs] = obstacle(Xin(i, 1), Xin(i, 2),obs_x,obs_y,arg);
@@ -25,7 +26,6 @@ function [lx, lu, lxx, luu, lux] = getCostDerivatives(Xin, U,local_plan, arg)
             ddb_obs = 0;
         end
 
-        
         % ---- 道路边界代价计算 ----
         % 左侧约束
         if arg.is_cal_lane_cost
@@ -46,15 +46,17 @@ function [lx, lu, lxx, luu, lux] = getCostDerivatives(Xin, U,local_plan, arg)
             db_lane_total = 0;
             ddb_lane_total = 0;
         end
-        
+   
         % 更新到代价导数
         lx(i,:) = lx(i,:) + db_obs + db_lane_total;
         lxx(i,:,:) = lxx(i,:,:)+ ddb_obs + ddb_lane_total;
         
-        
-        
+
         %%%%%%%%% 计算代价对于控制的导数
         %%%%转角约束
+        if i < arg.N+1
+        
+        end
         if arg.is_cal_steer_cost
             % v = Xin(i, 4);
             % c = U(i,:) * P2 - v * tan(arg.steer_angle_max / arg.l);

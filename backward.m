@@ -1,8 +1,7 @@
 function[k,K] = backward(X,U,lamb,local_plan,arg)
 
-[lx,lu,lxx,luu,lux] = getCostDerivatives(X(2:end,:),U,local_plan,arg);
-[df_dx,df_du] = get_dynamics_jacobians(X(2:end,:),U,arg);
-
+[df_dx,df_du] = get_dynamics_jacobians(X(1:end-1,:),U,arg);
+[lx,lu,lxx,luu,lux] = get_cost_derivatives(X,U,local_plan,arg);
 
 V_x = lx(end,:)';
 V_xx = squeeze(lxx(end,:,:))';
