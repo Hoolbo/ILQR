@@ -1,7 +1,7 @@
-function[k,K] = backward(X,U,lamb)
-global arg
-[lx,lu,lxx,luu,lux] = getCostDerivatives(X(2:end,:),U);
-[df_dx,df_du] = ilqr_getABMatrix(X(2:end,:),U);
+function[k,K] = backward(X,U,lamb,local_plan,arg)
+
+[lx,lu,lxx,luu,lux] = getCostDerivatives(X(2:end,:),U,local_plan,arg);
+[df_dx,df_du] = get_dynamics_jacobians(X(2:end,:),U,arg);
 
 
 V_x = lx(end,:)';

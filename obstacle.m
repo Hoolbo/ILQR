@@ -1,5 +1,4 @@
-function [b,b_dot, b_ddot] = obstacle(x, y,obs_x,obs_y)
-    global arg
+function [b,b_dot, b_ddot] = obstacle(x, y,obs_x,obs_y,arg)
     
     b = 0;
     b_dot = 0;

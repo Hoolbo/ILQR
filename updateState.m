@@ -1,15 +1,15 @@
-function [Xout] = updateState(Xin,U)
-    global arg
+function [f] = updateState(Xin,U,arg)
     x = Xin(1);
     y = Xin(2);
     phi = Xin(3);
     v = Xin(4);
     a = U(1);
     delta = U(2);
+    X = [x;y;phi;v];
+    U = [a;delta];
     beta = atan((arg.lr / (arg.lr + arg.lf)) * tan(delta));
-    xout = x + v * cos(phi + beta) * arg.dt;
-    yout = y + v * sin(phi + beta) * arg.dt;
-    phiout = phi + (v / arg.lr) * sin(beta) * arg.dt;
-    vout = v + a * arg.dt;
-    Xout = [xout; yout; phiout; vout];
+    f = [x + v * cos(phi + beta) * arg.dt; 
+        y + v * sin(phi + beta) * arg.dt; 
+        phi + (v / arg.l) * tan(delta) * cos(beta) * arg.dt;
+        v + a * arg.dt];
 end
