@@ -1,5 +1,4 @@
 function [b,b_dot, b_ddot] = obstacle(x, y,obs_x,obs_y,arg)
-    
     b = 0;
     b_dot = 0;
     b_ddot = 0;
@@ -22,7 +21,4 @@ function [b,b_dot, b_ddot] = obstacle(x, y,obs_x,obs_y,arg)
         b_dot = b_dot + b1_dot ;
         b_ddot = b_ddot + b1_ddot ;
     end
-
-    
-
 end

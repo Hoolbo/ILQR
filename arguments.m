@@ -60,8 +60,8 @@ arg.lamb_factor = 1.25;
 arg.lamb_init = 10;
 arg.lamb_max = 2000;
 arg.totalBarrierCost = 0;
-arg.startSpeed = 6;
-arg.desireSpeed = 6;
+arg.startSpeed = 10;
+arg.desireSpeed = 10;
 arg.preX = zeros(arg.N+1,arg.num_states) * nan;
 arg.preU = zeros(arg.N,arg.num_ctrl) * nan;
 arg.preX_nan = zeros(arg.N+1,arg.num_states) * nan;
@@ -78,7 +78,7 @@ arg.obs_radius = [1,1,1,1,1,1]; % 障碍物半径
 % arg.obs_x = [320];   % 障碍物 x 坐标
 % arg.obs_y = [3];   % 障碍物 y 坐标
 % arg.obs_radius = [1]; % 障碍物半径
-arg.obs_dx = 0.05;
+arg.obs_dx = 0.3;
 
 
 %%车辆几何参数
