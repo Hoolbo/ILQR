@@ -1,4 +1,4 @@
-function demo
+ function demo
 
     %% 初始化
     %载入参数

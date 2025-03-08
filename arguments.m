@@ -19,16 +19,6 @@ arg.Q = [1, 0, 0, 0;
          0, 0, 0, 1 ];
 arg.R = [0.5, 0;
          0, 2 ];
-     
-%%障碍物参数
-arg.obs_x = [300,340,420,460];   % 障碍物 x 坐标
-arg.obs_y = [3,0.5,1.2,-3];   % 障碍物 y 坐标
-arg.obs_radius = [1,1,1,1]; % 障碍物半径
-% arg.obs_x = [320];   % 障碍物 x 坐标
-% arg.obs_y = [3];   % 障碍物 y 坐标
-% arg.obs_radius = [1]; % 障碍物半径
-arg.obs_dx = 0.05;
-     
 
 %%仿真参数
 arg.dt = 0.1;
@@ -59,8 +49,8 @@ arg.lamb_factor = 1.25;
 arg.lamb_init = 10;
 arg.lamb_max = 2000;
 arg.totalBarrierCost = 0;
-arg.startSpeed = 10;
-arg.desireSpeed = 10;
+arg.startSpeed = 4;
+arg.desireSpeed = 4;
 arg.preX = zeros(arg.N+1,arg.num_states) * nan;
 arg.preU = zeros(arg.N,arg.num_ctrl) * nan;
 arg.preX_nan = zeros(arg.N+1,arg.num_states) * nan;
@@ -71,9 +61,9 @@ arg.obs_num = 4;
 arg.obs_radius = 1;
 arg.obs_traj = zeros(arg.N+1, arg.obs_num, 4);
 %% state x y theta v
-arg.obs_traj(1,1,:) = [200,0,0,0.1];
-arg.obs_traj(1,2,:) = [300,3,0,0.1];
-arg.obs_traj(1,3,:) = [330,3,0,0.1];
+arg.obs_traj(1,1,:) = [300,0,0,0.1];
+arg.obs_traj(1,2,:) = [250,3,0,-0.2];
+arg.obs_traj(1,3,:) = [330,3,0,0];
 arg.obs_traj(1,4,:) = [400,-1,0,0];
 % arg.obs_traj(1,5,:) = [420,1,0,0];
 for i = 2 : arg.N + 1
