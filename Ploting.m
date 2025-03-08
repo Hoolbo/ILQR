@@ -174,6 +174,13 @@ function [] = Ploting(Xlog, Xnew, Unew,i,arg,step_time,obs_traj)
     x_margin = max(100, speed * 3);  % 速度越大，边距越大
     axis([current_x - x_margin, current_x + x_margin,...
           current_y - y_margin, current_y + y_margin]);
+    % 定义平滑系数（0=完全跳变，1=保持原视图）
+    alpha = 0.2;
+    current_axis = axis();
+    target_axis = [current_x - x_margin, current_x + x_margin,...
+                   current_y - y_margin, current_y + y_margin];
+    smoothed_axis = alpha * target_axis + (1-alpha) * current_axis;
+    axis(smoothed_axis);
     
     % 更新标题
     title(sprintf(['Iteration: %d  单步时间: %.f ms\n' ...
