@@ -33,7 +33,7 @@ function [lx, lu, lxx, luu, lux] = get_cost_derivatives(X_traj, U, local_plan, o
             nor_r = [-sin(theta_r), cos(theta_r)];
             l = dX * nor_r';
             c_left = l - arg.trace_safe_width_left;
-            dc_left = [-sin(theta_r), cos(theta_r),0,0];
+            dc_left = [-sin(theta_r); cos(theta_r);0;0];
             [~, db_lane_left, ddb_lane_left] = barrierFunction(arg.lane_q1, arg.lane_q2, c_left, dc_left);
             % 右侧约束
             c_right = -l - arg.trace_safe_width_right;  % 右侧约束，安全距离相同
@@ -48,7 +48,7 @@ function [lx, lu, lxx, luu, lux] = get_cost_derivatives(X_traj, U, local_plan, o
         end
    
         % 合并
-        lx(i,:) = l_dx' + db_obs + db_lane_total;
+        lx(i,:) = l_dx + db_obs + db_lane_total;
         lxx(i,:,:) = l_ddx+ ddb_obs + ddb_lane_total;
     end
     

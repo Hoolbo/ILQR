@@ -49,8 +49,8 @@ arg.lamb_factor = 1.25;
 arg.lamb_init = 10;
 arg.lamb_max = 2000;
 arg.totalBarrierCost = 0;
-arg.startSpeed = 4;
-arg.desireSpeed = 4;
+arg.startSpeed = 5;
+arg.desireSpeed = 5;
 arg.preX = zeros(arg.N+1,arg.num_states) * nan;
 arg.preU = zeros(arg.N,arg.num_ctrl) * nan;
 arg.preX_nan = zeros(arg.N+1,arg.num_states) * nan;
@@ -76,7 +76,7 @@ for i = 2 : arg.N + 1
 end
 
 %%车辆参数
-arg.ego_rad = 4;
+arg.ego_rad = 3;
 arg.lf = 1.597;
 arg.lr = 1.133;
 arg.l = 2.73;
