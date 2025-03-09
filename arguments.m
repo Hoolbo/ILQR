@@ -29,8 +29,8 @@ arg.num_ctrl = 2;
 load('map_info');
 % load('map_info2');
 map_start_index = 300;
-% map_end_index = 1500;
-map_end_index = length(xcoord);
+map_end_index = 1800;
+% map_end_index = length(xcoord);
 arg.trace_width = 6;
 arg.trace_safe_width_left = 3;
 arg.trace_safe_width_right = 3;
@@ -66,7 +66,7 @@ arg.obs_traj(1,2,:) = [250,3,0,-0.2];
 arg.obs_traj(1,3,:) = [330,3,0,0];
 arg.obs_traj(1,4,:) = [400,-1,0,0];
 arg.obs_traj(1,5,:) = [420,1,0,0];
-arg.obs_traj(1,6,:) = [600,81,0,0];
+arg.obs_traj(1,6,:) = [600,82,0,0];
 for i = 2 : arg.N + 1
     for j = 1 : arg.obs_num
         arg.obs_traj(i,j,1) = arg.obs_traj(i-1,j,1) +arg.obs_traj(i-1,j,4) * cos(arg.obs_traj(i-1,j,3)) ;

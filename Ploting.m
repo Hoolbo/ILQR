@@ -98,7 +98,7 @@
 %                   i,step_time * 1000,Xnew(1,4), Unew(1,1), rad2deg(Unew(1,2))));
 %     drawnow;
 % end
-function [] = Ploting(Xlog, Ulog, Xnew, Unew, i, arg, step_time, obs_traj)
+function [] = Ploting(Xlog, Ulog, Xnew, i, arg, step_time, obs_traj)
     persistent fig_handle sub1 sub2 sub3 car_handle traj_handle pred_handle obs_handles accel_plot steer_plot
 
     %% 图形初始化
@@ -107,7 +107,7 @@ function [] = Ploting(Xlog, Ulog, Xnew, Unew, i, arg, step_time, obs_traj)
         fig_handle = figure('Name', 'ILQR轨迹优化', 'NumberTitle', 'off', 'WindowState', 'maximized');
         
         % 主轨迹图（占大部分区域）
-        sub1 = subplot('Position', [0.1 0.3 0.8 0.6]); % 主图位置
+        sub1 = subplot('Position', [0.1 0.4 0.8 0.6]); % 主图位置
         axis(sub1, 'equal'); hold(sub1, 'on');
         xlabel('X Position (m)'); ylabel('Y Position (m)');
         
@@ -130,14 +130,14 @@ function [] = Ploting(Xlog, Ulog, Xnew, Unew, i, arg, step_time, obs_traj)
         end
         
         % 加速度子图（左下角）
-        sub2 = subplot('Position', [0.1 0.1 0.35 0.15]); % 左下角
+        sub2 = subplot('Position', [0.1 0.15 0.35 0.2]); % 左下角
         accel_plot = plot(sub2, nan, nan, 'b-', 'LineWidth', 1.5);
         xlabel('迭代次数'); ylabel('加速度 (m/s²)');
         grid on; title('加速度历史');
         xlim([1 10]); % 初始范围
         
         % 转向角子图（右下角）
-        sub3 = subplot('Position', [0.55 0.1 0.35 0.15]); % 右下角
+        sub3 = subplot('Position', [0.55 0.15 0.35 0.2]); % 右下角
         steer_plot = plot(sub3, nan, nan, 'r-', 'LineWidth', 1.5);
         xlabel('迭代次数'); ylabel('转向角 (°)');
         grid on; title('转向角历史');
@@ -191,7 +191,7 @@ function [] = Ploting(Xlog, Ulog, Xnew, Unew, i, arg, step_time, obs_traj)
     sub3.YLim = [min(rad2deg(Ulog(1:i, 2))) - 5, max(rad2deg(Ulog(1:i, 2))) + 5];
     
     %% 主图视野调整
-    x_margin = max(50, Xnew(1, 4) * 3);
+    x_margin = max(100, Xnew(1, 4) * 3);
     y_margin = 30;
     axis(sub1, [x - x_margin, x + x_margin, y - y_margin, y + y_margin]);
     

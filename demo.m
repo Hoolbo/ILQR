@@ -38,7 +38,7 @@
         Ulog(i,:) = U_sequence(1,:);
 
         %画图
-        Ploting(Xlog,Ulog,X_trajectory,U_sequence,i,arg,step_time,obs_traj);
+        Ploting(Xlog,Ulog,X_trajectory,i,arg,step_time,obs_traj);
         %%更新车辆状态和障碍物状态
         X0 = X_trajectory(2,:);
         obs_traj = update_obs_state(arg.obs_num,obs_traj,arg.N);
