@@ -57,7 +57,7 @@ arg.preX_nan = zeros(arg.N+1,arg.num_states) * nan;
 arg.preU_nan = zeros(arg.N,arg.num_ctrl) * nan;
 
 %%障碍物参数
-arg.obs_num = 4;
+arg.obs_num = 5;
 arg.obs_radius = 1;
 arg.obs_traj = zeros(arg.N+1, arg.obs_num, 4);
 %% state x y theta v
@@ -65,7 +65,7 @@ arg.obs_traj(1,1,:) = [300,0,0,0.1];
 arg.obs_traj(1,2,:) = [250,3,0,-0.2];
 arg.obs_traj(1,3,:) = [330,3,0,0];
 arg.obs_traj(1,4,:) = [400,-1,0,0];
-% arg.obs_traj(1,5,:) = [420,1,0,0];
+arg.obs_traj(1,5,:) = [420,1,0,0];
 for i = 2 : arg.N + 1
     for j = 1 : arg.obs_num
         arg.obs_traj(i,j,1) = arg.obs_traj(i-1,j,1) +arg.obs_traj(i-1,j,4) * cos(arg.obs_traj(i-1,j,3)) ;

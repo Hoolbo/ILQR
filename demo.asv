@@ -10,8 +10,8 @@
     %控制变量 a 加速度 delta 前轮转角（弧度）
     % U = [ a ; delta ];
     %记录行驶过的轨迹
-    Xlog = zeros(arg.tf/arg.dt,arg.num_states);
-    Ulog = zeros(arg.tf/arg.dt,arg.num_ctrl);
+    Xlog = zeros(arg.num_states,arg.tf/arg.dt);
+    Ulog = zeros(arg.num_ctrl,arg.tf/arg.dt);
     error_count = 0;
     %% 初始化障碍物轨迹
     obs_traj = arg.obs_traj;
@@ -33,14 +33,13 @@
             error("连续求解失败次数大于10，停止仿真");
             end
         end
-        %%记录历史轨迹数据
-        Xlog(i,:) = X0;
-        Ulog(i,:) = U_sequence(1,:);
-
-        %画图
-        Ploting(Xlog,Ulog,X_trajectory,U_sequence,i,arg,step_time,obs_traj);
-        %%更新车辆状态和障碍物状态
         X0 = X_trajectory(2,:);
+        Xlog(:,i) = X0;
+        Ulog(:,i) = U_sequence();
+        
+        %画图
+        Ploting(Xlog,X_trajectory,U_sequence,i,arg,step_time,obs_traj);
+
         obs_traj = update_obs_state(arg.obs_num,obs_traj,arg.N);
     end
 end
