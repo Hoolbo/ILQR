@@ -29,8 +29,8 @@ arg.num_ctrl = 2;
 load('map_info');
 % load('map_info2');
 map_start_index = 300;
-map_end_index = 1500;
-% map_end_index = length(xcoord);
+% map_end_index = 1500;
+map_end_index = length(xcoord);
 arg.trace_width = 6;
 arg.trace_safe_width_left = 3;
 arg.trace_safe_width_right = 3;
@@ -49,7 +49,7 @@ arg.lamb_factor = 1.25;
 arg.lamb_init = 10;
 arg.lamb_max = 2000;
 arg.totalBarrierCost = 0;
-arg.startSpeed = 5;
+arg.startSpeed = 0;
 arg.desireSpeed = 5;
 arg.preX = zeros(arg.N+1,arg.num_states) * nan;
 arg.preU = zeros(arg.N,arg.num_ctrl) * nan;
@@ -57,7 +57,7 @@ arg.preX_nan = zeros(arg.N+1,arg.num_states) * nan;
 arg.preU_nan = zeros(arg.N,arg.num_ctrl) * nan;
 
 %%障碍物参数
-arg.obs_num = 5;
+arg.obs_num = 6;
 arg.obs_radius = 1;
 arg.obs_traj = zeros(arg.N+1, arg.obs_num, 4);
 %% state x y theta v
@@ -66,6 +66,7 @@ arg.obs_traj(1,2,:) = [250,3,0,-0.2];
 arg.obs_traj(1,3,:) = [330,3,0,0];
 arg.obs_traj(1,4,:) = [400,-1,0,0];
 arg.obs_traj(1,5,:) = [420,1,0,0];
+arg.obs_traj(1,6,:) = [600,81,0,0];
 for i = 2 : arg.N + 1
     for j = 1 : arg.obs_num
         arg.obs_traj(i,j,1) = arg.obs_traj(i-1,j,1) +arg.obs_traj(i-1,j,4) * cos(arg.obs_traj(i-1,j,3)) ;
